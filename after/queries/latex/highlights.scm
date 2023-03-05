@@ -1,0 +1,193 @@
+;extends
+(generic_environment 
+  (begin 
+    command: _  @namespace)
+  (end 
+    command: _  @namespace)
+  )
+
+(generic_environment 
+  begin: (begin
+    name: (curly_group_text
+           text: (text) @text.title)
+    )
+  end: (end
+           name: (curly_group_text
+              text: (text) @text.title)
+        )
+  )
+
+(enum_item
+  command: "\\item" @type)
+ 
+(inline_formula "$" @type)
+
+("\\[" @type (#set! conceal "‒"))
+("\\]" @type (#set! conceal "‒"))
+
+(displayed_equation "(" @constant
+                    ")" @constant)
+
+(math_delimiter
+  left_command:"\\left" @constant (#set! conceal "")
+  left_delimiter:"(" @constant
+  )
+(math_delimiter
+  right_command:"\\right" @constant (#set! conceal "")
+  right_delimiter:")" @constant
+  )
+
+(math_delimiter
+  left_command:"\\left" @constant (#set! conceal "")
+  left_delimiter:"[" @constant
+  )
+(math_delimiter
+  right_command:"\\right" @constant (#set! conceal "")
+  right_delimiter:"]" @constant
+  )
+
+
+("{" @constant)
+("}" @constant)
+
+
+; greek conceal
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\alpha")(#set! conceal "α"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\beta")(#set! conceal "β"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\gamma")(#set! conceal "γ"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\delta")(#set! conceal "δ"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\epsilon")(#set! conceal "ϵ"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\varepsilon")(#set! conceal "ε"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\zeta")(#set! conceal "ζ"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\eta")(#set! conceal "η"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\theta")(#set! conceal "θ"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\vartheta")(#set! conceal "ϑ"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\iota")(#set! conceal "ι"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\kappa")(#set! conceal "κ"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\lambda")(#set! conceal "λ"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\mu")(#set! conceal "μ"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\nu")(#set! conceal "ν"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\xi")(#set! conceal "ξ"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\pi")(#set! conceal "π"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\varpi")(#set! conceal "ϖ"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\rho")(#set! conceal "ρ"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\varrho")(#set! conceal "ϱ"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\sigma")(#set! conceal "σ"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\varsigma")(#set! conceal "ς"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\tau")(#set! conceal "τ"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\upsilon")(#set! conceal "υ"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\phi")(#set! conceal "ϕ"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\varphi")(#set! conceal "φ"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\chi")(#set! conceal "χ"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\psi")(#set! conceal "ψ"))
+(generic_command command: (command_name)  @keyword (#eq? @keyword "\\omega")(#set! conceal "ω"))
+; perchè le lettere maiuscole danno problemi?
+;(generic_command command: (command_name)  @keyword (#eq? @keyword "\\Gamma")(#set! conceal "Γ"))
+;(generic_command command: (command_name)  @keyword (#eq? @keyword "\\Delta")(#set! conceal "Δ"))
+;(generic_command command: (command_name)  @keyword (#eq? @keyword "\\Theta")(#set! conceal "Θ"))
+;(generic_command command: (command_name)  @keyword (#eq? @keyword "\\Lambda")(#set! conceal "Λ"))
+;(generic_command command: (command_name)  @keyword (#eq? @keyword "\\Xi")(#set! conceal "Ξ"))
+;(generic_command command: (command_name)  @keyword (#eq? @keyword "\\Pi")(#set! conceal "Π"))
+;(generic_command command: (command_name)  @keyword (#eq? @keyword "\\Sigma")(#set! conceal "Σ"))
+;(generic_command command: (command_name)  @keyword (#eq? @keyword "\\Upsilon")(#set! conceal "Υ"))
+;(generic_command command: (command_name)  @keyword (#eq? @keyword "\\Phi")(#set! conceal "Φ"))
+;(generic_command command: (command_name)  @keyword (#eq? @keyword "\\Chi")(#set! conceal "Χ"))
+;(generic_command command: (command_name)  @keyword (#eq? @keyword "\\Psi")(#set! conceal "Ψ"))
+;(generic_command command: (command_name)  @keyword (#eq? @keyword "\\Omega")(#set! conceal "Ω"))
+
+((superscript) @conceal (#eq? @conceal "^0")(#set! conceal "⁰"))
+((superscript) @conceal (#eq? @conceal "^1")(#set! conceal "¹"))
+((superscript) @conceal (#eq? @conceal "^2")(#set! conceal "²"))
+((superscript) @conceal (#eq? @conceal "^3")(#set! conceal "³"))
+((superscript) @conceal (#eq? @conceal "^4")(#set! conceal "⁴"))
+((superscript) @conceal (#eq? @conceal "^5")(#set! conceal "⁵"))
+((superscript) @conceal (#eq? @conceal "^6")(#set! conceal "⁶"))
+((superscript) @conceal (#eq? @conceal "^7")(#set! conceal "⁷"))
+((superscript) @conceal (#eq? @conceal "^8")(#set! conceal "⁸"))
+((superscript) @conceal (#eq? @conceal "^9")(#set! conceal "⁹"))
+((superscript) @conceal (#eq? @conceal "^a")(#set! conceal "ᵃ"))
+((superscript) @conceal (#eq? @conceal "^b")(#set! conceal "ᵇ"))
+((superscript) @conceal (#eq? @conceal "^c")(#set! conceal "ᶜ"))
+((superscript) @conceal (#eq? @conceal "^d")(#set! conceal "ᵈ"))
+((superscript) @conceal (#eq? @conceal "^e")(#set! conceal "ᵉ"))
+((superscript) @conceal (#eq? @conceal "^f")(#set! conceal "ᶠ"))
+((superscript) @conceal (#eq? @conceal "^g")(#set! conceal "ᵍ"))
+((superscript) @conceal (#eq? @conceal "^h")(#set! conceal "ʰ"))
+((superscript) @conceal (#eq? @conceal "^i")(#set! conceal "ⁱ"))
+((superscript) @conceal (#eq? @conceal "^j")(#set! conceal "ʲ"))
+((superscript) @conceal (#eq? @conceal "^k")(#set! conceal "ᵏ"))
+((superscript) @conceal (#eq? @conceal "^l")(#set! conceal "ˡ"))
+((superscript) @conceal (#eq? @conceal "^m")(#set! conceal "ᵐ"))
+((superscript) @conceal (#eq? @conceal "^n")(#set! conceal "ⁿ"))
+((superscript) @conceal (#eq? @conceal "^o")(#set! conceal "ᵒ"))
+((superscript) @conceal (#eq? @conceal "^p")(#set! conceal "ᵖ"))
+((superscript) @conceal (#eq? @conceal "^r")(#set! conceal "ʳ"))
+((superscript) @conceal (#eq? @conceal "^s")(#set! conceal "ˢ"))
+((superscript) @conceal (#eq? @conceal "^t")(#set! conceal "ᵗ"))
+((superscript) @conceal (#eq? @conceal "^u")(#set! conceal "ᵘ"))
+((superscript) @conceal (#eq? @conceal "^v")(#set! conceal "ᵛ"))
+((superscript) @conceal (#eq? @conceal "^w")(#set! conceal "ʷ"))
+((superscript) @conceal (#eq? @conceal "^x")(#set! conceal "ˣ"))
+((superscript) @conceal (#eq? @conceal "^y")(#set! conceal "ʸ"))
+((superscript) @conceal (#eq? @conceal "^z")(#set! conceal "ᶻ"))
+((superscript) @conceal (#eq? @conceal "^A")(#set! conceal "ᴬ"))
+((superscript) @conceal (#eq? @conceal "^B")(#set! conceal "ᴮ"))
+((superscript) @conceal (#eq? @conceal "^D")(#set! conceal "ᴰ"))
+((superscript) @conceal (#eq? @conceal "^E")(#set! conceal "ᴱ"))
+((superscript) @conceal (#eq? @conceal "^G")(#set! conceal "ᴳ"))
+((superscript) @conceal (#eq? @conceal "^H")(#set! conceal "ᴴ"))
+((superscript) @conceal (#eq? @conceal "^I")(#set! conceal "ᴵ"))
+((superscript) @conceal (#eq? @conceal "^J")(#set! conceal "ᴶ"))
+((superscript) @conceal (#eq? @conceal "^K")(#set! conceal "ᴷ"))
+((superscript) @conceal (#eq? @conceal "^L")(#set! conceal "ᴸ"))
+((superscript) @conceal (#eq? @conceal "^M")(#set! conceal "ᴹ"))
+((superscript) @conceal (#eq? @conceal "^N")(#set! conceal "ᴺ"))
+((superscript) @conceal (#eq? @conceal "^O")(#set! conceal "ᴼ"))
+((superscript) @conceal (#eq? @conceal "^P")(#set! conceal "ᴾ"))
+((superscript) @conceal (#eq? @conceal "^R")(#set! conceal "ᴿ"))
+((superscript) @conceal (#eq? @conceal "^T")(#set! conceal "ᵀ"))
+((superscript) @conceal (#eq? @conceal "^U")(#set! conceal "ᵁ"))
+((superscript) @conceal (#eq? @conceal "^V")(#set! conceal "ⱽ"))
+((superscript) @conceal (#eq? @conceal "^W")(#set! conceal "ᵂ"))
+((superscript) @conceal (#eq? @conceal "^W")(#set! conceal "ᵂ"))
+
+(inline_formula "$" @conceal (#set! conceal ""))
+(enum_item command:"\\item" @conceal (#set! conceal "◌"))
+
+((word) @type (#eq? @type "&")(#set! conceal "|"))
+((command_name) @type (#eq? @type "\\\\")(#set! conceal "↩"))
+
+((subscript) @conceal (#eq? @conceal "_0")(#set! conceal "₀"))
+((subscript) @conceal (#eq? @conceal "_1")(#set! conceal "₁"))
+((subscript) @conceal (#eq? @conceal "_2")(#set! conceal "₂"))
+((subscript) @conceal (#eq? @conceal "_3")(#set! conceal "₃"))
+((subscript) @conceal (#eq? @conceal "_4")(#set! conceal "₄"))
+((subscript) @conceal (#eq? @conceal "_5")(#set! conceal "₅"))
+((subscript) @conceal (#eq? @conceal "_6")(#set! conceal "₆"))
+((subscript) @conceal (#eq? @conceal "_7")(#set! conceal "₇"))
+((subscript) @conceal (#eq? @conceal "_8")(#set! conceal "₈"))
+((subscript) @conceal (#eq? @conceal "_9")(#set! conceal "₉"))
+((subscript) @conceal (#eq? @conceal "_a")(#set! conceal "ₐ"))
+((subscript) @conceal (#eq? @conceal "_e")(#set! conceal "ₑ"))
+((subscript) @conceal (#eq? @conceal "_h")(#set! conceal "ₕ"))
+((subscript) @conceal (#eq? @conceal "_i")(#set! conceal "ᵢ"))
+((subscript) @conceal (#eq? @conceal "_j")(#set! conceal "ⱼ"))
+((subscript) @conceal (#eq? @conceal "_k")(#set! conceal "ₖ"))
+((subscript) @conceal (#eq? @conceal "_l")(#set! conceal "ₗ"))
+((subscript) @conceal (#eq? @conceal "_m")(#set! conceal "ₘ"))
+((subscript) @conceal (#eq? @conceal "_n")(#set! conceal "ₙ"))
+((subscript) @conceal (#eq? @conceal "_o")(#set! conceal "ₒ"))
+((subscript) @conceal (#eq? @conceal "_p")(#set! conceal "ₚ"))
+((subscript) @conceal (#eq? @conceal "_r")(#set! conceal "ᵣ"))
+((subscript) @conceal (#eq? @conceal "_s")(#set! conceal "ₛ"))
+((subscript) @conceal (#eq? @conceal "_t")(#set! conceal "ₜ"))
+((subscript) @conceal (#eq? @conceal "_u")(#set! conceal "ᵤ"))
+((subscript) @conceal (#eq? @conceal "_v")(#set! conceal "ᵥ"))
+((subscript) @conceal (#eq? @conceal "_x")(#set! conceal "ₓ"))
+((subscript) @conceal (#eq? @conceal "_x")(#set! conceal "ₓ"))
+
+;((section command : "\\section" @conceal)  (#set! conceal ""))
+((section text:(curly_group (text) @text.underline)))
+((section text:(curly_group (text) @evidenzia)))
+((subsection text:(curly_group (text) @text.underline)))
+((subsubsection text:(curly_group (text) @text.underline)))
