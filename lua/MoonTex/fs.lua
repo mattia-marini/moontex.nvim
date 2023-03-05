@@ -1,5 +1,6 @@
 local config = require("MoonTex.config")
 
+--returns true if file is in directory
 local function is_in_dir(directory, file)
     for dir in vim.fs.dir(directory) do
       if dir == file then return true end
@@ -7,12 +8,14 @@ local function is_in_dir(directory, file)
   return false
 end
 
+--prints every file in the current directory (directory of the file opened by the buffer)
 local function print_curr_dir()
   for dir in vim.fs.dir(vim.fs.dirname(vim.api.nvim_buf_get_name(0))) do
     print(dir)
   end
 end
 
+--return the folder containing the whole latex project
 local function get_root(path)
   
   if vim.fs.basename(path) == config.main_file_name then
@@ -34,7 +37,8 @@ local function get_root(path)
   return vim.fs.dirname(path)
 end
 
---setta il file main
+
+
 
 local fn = {
   ["is_in_dir"] = is_in_dir,

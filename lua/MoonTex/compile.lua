@@ -1,9 +1,7 @@
 local config = require("MoonTex.config")
 local tex_fs = require("MoonTex.fs")
---inizializza il socket per ricevere messaggi dall lettore pdf
-local server_started = false
 
-
+--starts/stops continuous conpile with latekmk
 local compile_running = false
 function toggle_compile()
   if compile_running == false then
@@ -15,6 +13,7 @@ function toggle_compile()
   end
 end
 
+--starts continuous conpile with latekmk
 function vimtex_compile_start()
   
   if vim.api.nvim_buf_get_var(0,"main_file_dir")==nil then print("Coundn't resolve mainfile path") return end
@@ -25,26 +24,9 @@ function vimtex_compile_start()
 
 end
 
+--starts continuous conpile with latekmk
 function vimtex_compile_stop()
   vim.fn.jobstop(compile_channel_id)
-  --vim.fn.chansend(compile_channel_id, "<C-c>")
-  --vim.fn.chanclose(compile_channel_id)
 end
-
-function start_tex_server()
-  if not tex_fs.is_in_dir(vim.api.nvim_buf_get_var(0, "main_file_dir"), config.server_name) then
-    vim.fn.serverstart(vim.api.nvim_buf_get_var(0, "main_file_dir").."/"..config.server_name)
-  end
-end
-
---[[
-vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
-  pattern = "*.tex"
-  callback = function()
-    print("FILETYPE: tex")
-  end
-})
---]]
---
 
 

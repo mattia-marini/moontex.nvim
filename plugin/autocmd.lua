@@ -1,15 +1,16 @@
+--autocommands have to be defined before the ftplugin directory is sourced, since not doing so can result in declaring autocommands afret certain events are triggered
 local tex_fs = require("MoonTex.fs")
 
+--sets the main file directory as a tex buffer is opened
 vim.api.nvim_create_autocmd({"BufRead", "BufNewFile" }, {
   pattern = {"*.tex"},
   callback = function()
-    --print("Inizializzo server")
-    --vim.api.nvim_echo({{"Inizializzo server", "Underlined"}}, true, {})
     vim.api.nvim_buf_set_var(0, "main_file_dir", tex_fs.get_root(vim.api.nvim_buf_get_name(0)))
     start_tex_server()
   end
 })
 
+--sets buffer specific keymaps, leaving theese free to be used on non tex buffers
 vim.api.nvim_create_autocmd({"BufRead", "BufNewFile" }, {
   pattern = {"*.tex"},
   callback = function()
