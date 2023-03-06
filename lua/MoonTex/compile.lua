@@ -20,7 +20,8 @@ function vimtex_compile_start()
 
   vim.api.nvim_echo({{"Compiling...", "Substitute"}}, true, {})
   vim.cmd("silent w")
-  compile_channel_id=vim.fn.jobstart("cd "..vim.api.nvim_buf_get_var(0,"main_file_dir").." && latexmk -interaction=nonstopmode -r "..vim.api.nvim_get_var("MoonTex_install_dir").."/.latexmkrc ".. config.main_file_name, {on_exit = function() vim.api.nvim_echo({{"Compiling stopped!", "Substitute"}}, true, {}) end})
+  --print("cd "..vim.api.nvim_buf_get_var(0,"main_file_dir").." && latexmk -interaction=nonstopmode -r "..vim.api.nvim_get_var("MoonTex_install_dir").."/.latexmkrc ".. config.main_file_name)
+  compile_channel_id=vim.fn.jobstart("cd \""..vim.api.nvim_buf_get_var(0,"main_file_dir").."\" && latexmk -interaction=nonstopmode -r "..vim.api.nvim_get_var("MoonTex_install_dir").."/.latexmkrc ".. config.main_file_name, {on_exit = function() vim.api.nvim_echo({{"Compiling stopped!", "Substitute"}}, true, {}) end})
 
 end
 
