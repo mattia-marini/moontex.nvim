@@ -39,6 +39,7 @@ function start_tex_server()
   end
 end
 
+
 --skim synch
 --command: nvim
 --args: --headless --noplugin -u <path to installation of MoonTex> -c "InverseSearch \"%file\" %line"
