@@ -34,6 +34,7 @@ function inverse_search(file, line)
       vim.fn.chanclose(socket_channel)
     end
   end
+  vim.cmd(":q!")
 end
 
 --move cursor without errors for out of bound indexes
@@ -58,8 +59,9 @@ local function start_tex_server()
   local server_number = 0
 
   for path in vim.fs.dir(server_dir) do
-    local curr_n = tonumber(path:match("^" .. project_name .. ".%d"))
+    local curr_n = tonumber(path:match("^" .. project_name .. "%.(%d)"))
     if curr_n then
+      print(curr_n)
       if curr_n > server_number then
         server_number = curr_n
       end
