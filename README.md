@@ -38,14 +38,14 @@ Not much to do here. Configure like any other plugin. Below are listed the defau
 ```lua 
 require("MoonTex").config({
   workspace_folder_name = "latex_workspace",
-  main_file_name = "main.tex",
+  mainfile_name = "main.tex",
   max_search_depth = 5,
   server_name = "tex_server"
 })
 ```
 
 * ```workspace_folder_name```: when trying to detect the main file, MoonTex searches in the partent folders of the current buffer. When a folder matches this name though, it stops.
-* ```main_file_name```: simplest way to efficiently detect the main file is to explicitly set its name. Other ways of detecting the mainfile will be implemented in the near future
+* ```mainfile_name```: simplest way to efficiently detect the main file is to explicitly set its name. Other ways of detecting the mainfile will be implemented in the near future
 * ```max_search_depth```: the max number of recursions to do in order to set the main file path.
 * ```server_name```: the name of MoonTex's socket. The socket is created in the same directory as the main file
 

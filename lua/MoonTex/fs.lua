@@ -18,7 +18,7 @@ end
 --return the folder containing the whole latex project
 local function get_root(path)
   
-  if vim.fs.basename(path) == config.main_file_name then
+  if vim.fs.basename(path) == config.mainfile_name..".tex" then
     return vim.fs.dirname(path)
   end
 
@@ -27,7 +27,7 @@ local function get_root(path)
 
   while depth < config.max_search_depth and vim.fs.basename(curr_path)~=config.workspace_folder_name do
 
-    if is_in_dir(curr_path, config.main_file_name) then return curr_path end
+    if is_in_dir(curr_path, config.mainfile_name .. ".tex") then return curr_path end
 
     curr_path = vim.fs.dirname(curr_path)
     depth = depth + 1
