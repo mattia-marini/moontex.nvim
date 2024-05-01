@@ -17,18 +17,19 @@ function forward_search()
     "/Contents/SharedSupport/displayline -g " ..
     vim.api.nvim_win_get_cursor(0)[1] ..
     " \"" ..
-    util.get_buf_status("mainfile_dir") .. "/" .. config.mainfile_name ".pdf\"" ..
+    util.get_buf_status("mainfile_dir") .. "/" .. config.mainfile_name .. ".pdf\"" ..
     " \"" .. vim.api.nvim_buf_get_name(0) .. "\"", { on_exit = function() print("Forward search done!") end })
 end
 
 --invoked by InverseSearch when perfoming inverse search (skim)
 function inverse_search(file, line)
   local project_name = vim.fs.basename(mt_fs.get_root(file))
-
   local server_dir = util.get_server_dir()
+
   for server in vim.fs.dir(server_dir) do
     if server:match("^" .. project_name) then
-      local socket_channel = vim.fn.sockconnect('pipe', server, { rpc = 1 })
+      local full_path = server_dir .. "/" .. server
+      local socket_channel = vim.fn.sockconnect('pipe', full_path, { rpc = 1 })
       vim.rpcrequest(socket_channel, 'nvim_command', ":lua move_cursor(" .. line .. ")")
       vim.fn.chanclose(socket_channel)
     end
@@ -72,7 +73,7 @@ end
 
 
 return {
-  start_tex_server=start_tex_server
+  start_tex_server = start_tex_server
 }
 --skim synch
 --command: nvim
