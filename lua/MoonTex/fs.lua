@@ -17,7 +17,7 @@ end
 
 --return the folder containing the whole latex project
 local function get_root(path)
-  
+
   if vim.fs.basename(path) == config.mainfile_name..".tex" then
     return vim.fs.dirname(path)
   end
