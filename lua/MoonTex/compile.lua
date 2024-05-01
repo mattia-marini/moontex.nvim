@@ -26,15 +26,23 @@ function vimtex_compile_start()
   vim.api.nvim_echo({ { "Compiling...", "Substitute" } }, true, {})
   vim.cmd("silent w")
   --print("cd "..vim.api.nvim_buf_get_var(0,"main_file_dir").." && latexmk -interaction=nonstopmode -r "..vim.api.nvim_get_var("MoonTex_install_dir").."/.latexmkrc ".. config.main_file_name)
-  compile_channel_id = vim.fn.jobstart(
-  "cd \"" ..
-  mainfile_dir ..
-  "\" && latexmk -interaction=nonstopmode -r " ..
-  vim.api.nvim_get_var("MoonTex_install_dir") .. "/.latexmkrc " .. config.main_file_name,
-  { on_exit = function() vim.api.nvim_echo({ { "Compiling stopped!", "Substitute" } }, true, {}) end })
+
+  local compile_channel_id = vim.fn.jobstart(
+    "cd \"" ..
+    mainfile_dir ..
+    "\" && latexmk -interaction=nonstopmode -r " ..
+    vim.api.nvim_get_var("MoonTex_install_dir") .. "/.latexmkrc " .. config.main_file_name,
+    { on_exit = function() vim.api.nvim_echo({ { "Compiling stopped!", "Substitute" } }, true, {}) end })
+
+  util.set_buf_status("compile_channel_id", compile_channel_id)
 end
 
 --starts continuous conpile with latekmk
 function vimtex_compile_stop()
-  vim.fn.jobstop(compile_channel_id)
+  local compile_channel_id = util.get_buf_status("compile_channel_id")
+  if compile_channel_id then
+    vim.fn.jobstop(compile_channel_id)
+  else
+    print("Errore! Nessuna compilazione da fermare")
+  end
 end
