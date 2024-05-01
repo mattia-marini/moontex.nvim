@@ -1,17 +1,28 @@
 local function get_buf_status(name)
   local found, rv = pcall(function()
-    return vim.api.nvim_buf_get_var(0, "mt_status")[name]
+    local t = vim.api.nvim_buf_get_var(0, "mt_status")
+    --P(t)
+    return t[name]
   end
   )
 
-  return (found and rv or nil)
+  return rv
+  --return (found and rv or nil)
 end
 
 local function set_buf_status(name, val)
+
+  --[[
   local success, t = pcall(function()return vim.api.nvim_buf_get_var(0, "mt_status") end)
   if not success then
-    t = {}
+    print("inizializzo a zero")
+    return
+    --vim.api.nvim_buf_set_var(0, "mt_status", {})
   end
+
+  --]]
+
+  local t = vim.api.nvim_buf_get_var(0, "mt_status")
   t[name] = val
   vim.api.nvim_buf_set_var(0, "mt_status", t)
 end

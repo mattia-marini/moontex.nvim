@@ -1,5 +1,7 @@
-require("MoonTex.search")
+--print("lua")
+require("MoonTex.setup")
 require("MoonTex.compile")
+require("MoonTex.search")
 require("MoonTex.fs")
 require("MoonTex.config")
 

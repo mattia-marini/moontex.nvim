@@ -42,7 +42,7 @@ function move_cursor(line)
 end
 
 --starts server for backwards search
-function start_tex_server()
+local function start_tex_server()
   local server_dir = util.get_server_dir()
 
   --local server_dir = vim.fn.serverstart(nvim_servers_path .. "/" .. vim.fn.basename(util.get_buf_status("mainfile_dir")) .. "/")
@@ -70,6 +70,10 @@ function start_tex_server()
   vim.fn.serverstart(server_dir .. "/" .. project_name .. "." .. server_number)
 end
 
+
+return {
+  start_tex_server=start_tex_server
+}
 --skim synch
 --command: nvim
 --args: --headless --noplugin -u <path to installation of MoonTex> -c "InverseSearch \"%file\" %line"
