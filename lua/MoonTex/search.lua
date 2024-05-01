@@ -12,7 +12,7 @@ end
 
 --forward search
 function forward_search()
-  vim.fn.jobstart("/Applications/Skim.app/Contents/SharedSupport/displayline -g "..vim.api.nvim_win_get_cursor(0)[1].." \""..util.get_buf_status("mainfile_dir").."/"..config.mainfile_name".pdf\"".." \""..vim.api.nvim_buf_get_name(0).."\"", {on_exit=function() print("Forward search done!") end})
+  vim.fn.jobstart(config.skim_path.."/Contents/SharedSupport/displayline -g "..vim.api.nvim_win_get_cursor(0)[1].." \""..util.get_buf_status("mainfile_dir").."/"..config.mainfile_name".pdf\"".." \""..vim.api.nvim_buf_get_name(0).."\"", {on_exit=function() print("Forward search done!") end})
 end
 
 --invoked by InverseSearch when perfoming inverse search (skim)
