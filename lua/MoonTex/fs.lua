@@ -38,12 +38,29 @@ local function get_root(path)
 end
 
 
+function path_exists(path)
+    local stat = vim.uv.fs_stat(path)
+    return stat --and stat.type == "directory"
+end
+
+function create_directory(path)
+
+    --if path_exists(path)then print("cartella esiste") end
+    local ok, err = vim.uv.fs_mkdir(path , 493) -- 493 is the octal representation of 0755 permissions
+    if ok then
+        print("Directory created successfully!")
+    else
+        print("Failed to create directory:", err)
+    end
+end
 
 
 local fn = {
   ["is_in_dir"] = is_in_dir,
   ["print_curr_dir"] =print_curr_dir,
-  ["get_root"] = get_root
+  ["get_root"] = get_root,
+  ["path_exists"] = path_exists,
+  ["create_directory"] = create_directory
 }
 
 return fn
