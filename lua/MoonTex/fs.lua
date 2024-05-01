@@ -27,7 +27,7 @@ local function get_root(path)
 
   while depth < config.max_search_depth and vim.fs.basename(curr_path)~=config.workspace_folder_name do
 
-    if is_in_dir(curr_path, config.main_file_name) then return  curr_path end
+    if is_in_dir(curr_path, config.main_file_name) then return curr_path end
 
     curr_path = vim.fs.dirname(curr_path)
     depth = depth + 1

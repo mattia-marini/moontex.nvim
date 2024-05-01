@@ -5,7 +5,7 @@ local tex_fs = require("MoonTex.fs")
 vim.api.nvim_create_autocmd({"BufRead", "BufNewFile" }, {
   pattern = {"*.tex"},
   callback = function()
-    vim.api.nvim_buf_set_var(0, "main_file_dir", tex_fs.get_root(vim.api.nvim_buf_get_name(0)))
+    vim.api.nvim_buf_set_var(0, "mt_status", { mainfile_dir = tex_fs.get_root(vim.api.nvim_buf_get_name(0)) } )
     start_tex_server()
   end
 })

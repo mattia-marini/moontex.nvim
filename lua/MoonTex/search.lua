@@ -20,6 +20,7 @@ function inverse_search(file, line)
   local socket = mt_fs.get_root(file)
   print(socket.."/"..config.server_name)
   local socket_channel = vim.fn.sockconnect('pipe', socket.."/"..config.server_name, {rpc = 1})
+  --stdpath("run")..//project name
 
   vim.rpcrequest(socket_channel, 'nvim_command', ":lua move_cursor("..line..")")
   
