@@ -1,4 +1,5 @@
 vim.api.nvim_buf_set_var(0, "mt_status", {})
+vim.opt.wrap = true
 
 local tex_fs = require("MoonTex.fs")
 local util = require("MoonTex.util")
