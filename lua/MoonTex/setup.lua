@@ -11,7 +11,6 @@ end
 
 --setto la directory di dove è installato il plugin per accedere al file .markdown
 local d = vim.fs.dirname(vim.fs.dirname(vim.fs.dirname(script_dir())))
-print(d)
 vim.api.nvim_set_var("mt_install_dir", d)
 
 --vim.api.nvim_buf_set_var(0, "mt_status", { mainfile_dir = tex_fs.get_root(vim.api.nvim_buf_get_name(0)) })

@@ -47,11 +47,6 @@ end
 local function start_tex_server()
   local server_dir = util.get_server_dir()
 
-  --local server_dir = vim.fn.serverstart(nvim_servers_path .. "/" .. vim.fn.basename(util.get_buf_status("mainfile_dir")) .. "/")
-  --util.set_buf_status("server_path", server_path)
-
-  print(server_dir)
-
   if not mt_fs.path_exists(server_dir) then create_directory(server_dir) end
 
   local project_name = vim.fs.basename(util.get_buf_status("mainfile_dir"))
@@ -61,7 +56,6 @@ local function start_tex_server()
   for path in vim.fs.dir(server_dir) do
     local curr_n = tonumber(path:match("^" .. project_name .. "%.(%d)"))
     if curr_n then
-      print(curr_n)
       if curr_n > server_number then
         server_number = curr_n
       end

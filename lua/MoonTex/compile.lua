@@ -5,12 +5,8 @@ local tex_fs = require("MoonTex.fs")
 --starts/stops continuous conpile with latekmk
 --
 util.set_buf_status("compiling", false)
-print("settato stato compiling")
 function toggle_compile()
-  --print(util.get_buf_status("compiling"))
-  vim.cmd("echo b:mt_status")
   if util.get_buf_status("compiling") == false then
-    print("inizio a compilare")
     util.set_buf_status("compiling", true)
     vimtex_compile_start()
   else
@@ -35,7 +31,7 @@ function vimtex_compile_start()
     "\" && latexmk -interaction=nonstopmode -r " ..
     vim.api.nvim_get_var("mt_install_dir") .. "/.latexmkrc " .. config.mainfile_name .. ".tex"
 
-  print("COMPILE command: " .. compile_command)
+  --print("COMPILE command: " .. compile_command)
 
   local compile_channel_id = vim.fn.jobstart(
     compile_command,
