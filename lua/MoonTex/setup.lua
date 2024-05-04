@@ -30,3 +30,14 @@ vim.api.nvim_create_user_command('MTPrintSkimCommand',
       vim.api.nvim_get_var("MoonTex_install_dir") .. [[/lua/MoonTex/search.lua -c "InverseSearch \"%file\" %line"]])
   end,
   {})
+vim.api.nvim_create_user_command('MTRevealProject',
+  function()
+    local dir = util.get_buf_status("mainfile_dir")
+    local onExit = function(obj)
+      if obj.code == 0 then 
+        print("Ho aperto la directory: ".. dir)
+      end
+    end
+    vim.system({'open', util.get_buf_status("mainfile_dir")}, { text = true }, onExit)
+  end,
+  {})
