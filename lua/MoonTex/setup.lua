@@ -20,8 +20,16 @@ search.start_tex_server()
 
 --sets the main file directory as a tex buffer is opened
 --sets buffer specific keymaps, leaving theese free to be used on non tex buffers
-vim.api.nvim_buf_set_keymap(0, "n", "<space>r", ":lua toggle_compile()<CR>", { noremap = true })
-vim.api.nvim_set_keymap('n', '<space>s', ':lua forward_search()<CR>', { noremap = true })
+vim.api.nvim_buf_set_keymap(0, "n", "<space>r", "", {
+  noremap = true,
+  callback = function()
+    toggle_compile()
+  end
+})
+vim.api.nvim_set_keymap('n', '<space>s', '', { noremap = true, 
+callback = function ()
+  forward_search()
+end})
 
 vim.api.nvim_create_user_command('MTPrintSkimCommand',
   function()
@@ -34,10 +42,10 @@ vim.api.nvim_create_user_command('MTRevealProject',
   function()
     local dir = util.get_buf_status("mainfile_dir")
     local onExit = function(obj)
-      if obj.code == 0 then 
-        print("Ho aperto la directory: ".. dir)
+      if obj.code == 0 then
+        print("Ho aperto la directory: " .. dir)
       end
     end
-    vim.system({'open', util.get_buf_status("mainfile_dir")}, { text = true }, onExit)
+    vim.system({ 'open', util.get_buf_status("mainfile_dir") }, { text = true }, onExit)
   end,
   {})
