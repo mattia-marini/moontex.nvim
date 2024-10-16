@@ -1,4 +1,4 @@
-# MoonTex
+# Moontex
 1. [Overview/features](#overview)
 2. [Usage](#usage)
     1. [Installation](#installation)
@@ -8,10 +8,10 @@
 
 <a name="overview"></a>
 ## Overview/features 
-MoonTex is a Neovim plugin that provides basic features to work with LaTex files. *This is a personal project and does **NOT** aim to be a complete and feature-rich plugin. You should use this only if you need a basic latex plugin that integrates with other lua plugins (TreeSitter, LSP, LuaSnips). Most users should definetely opt for [Vimtex](https://github.com/lervag/vimtex) instead*
+Moontex is a Neovim plugin that provides basic features to work with LaTex files. *This is a personal project and does **NOT** aim to be a complete and feature-rich plugin. You should use this only if you need a basic latex plugin that integrates with other lua plugins (TreeSitter, LSP, LuaSnips). Most users should definetely opt for [Vimtex](https://github.com/lervag/vimtex) instead*
 
 ## Features
-MoonTex provides basic features such as
+Moontex provides basic features such as
 1. Continuous compilation using [latexmk](https://ctan.org/pkg/latexmk/?lang=en)
 2. Forward/inverse search with [skim](https://skim-app.sourceforge.io)
 3. Treesitter based conceal and hilighting
@@ -44,14 +44,14 @@ require("MoonTex").config({
 })
 ```
 
-* ```workspace_folder_name```: when trying to detect the main file, MoonTex searches in the partent folders of the current buffer. When a folder matches this name though, it stops.
+* ```workspace_folder_name```: when trying to detect the main file, moontex searches in the partent folders of the current buffer. When a folder matches this name though, it stops.
 * ```mainfile_name```: simplest way to efficiently detect the main file is to explicitly set its name. Other ways of detecting the mainfile will be implemented in the near future
 * ```max_search_depth```: the max number of recursions to do in order to set the main file path.
-* ```server_name```: the name of MoonTex's socket. The socket is created in the same directory as the main file
+* ```server_name```: the name of moontex's socket. The socket is created in the same directory as the main file
 
 #### Inverse serach cofiguration
 By far, document syncing is supported only on Skim. Forward search should work out of the box, whereas you should setup skim in order for backward search to work properly.
-1. Open a .tex file with MoonTex installed and run ```MTPrintSkimCommand```
+1. Open a .tex file with moontex installed and run ```MTPrintSkimCommand```
 2. Open ```skim -> Preferences -> Sync``` and paste the otput of the previous command in the corresponding sections. Your command should look something like this:
 ```bash
 command: nvim
@@ -60,7 +60,7 @@ args: --headless --noplugin -u /Users/<your-name>/.local/share/nvim/site/pack/pa
 
 <a name="workspace"></a>
 ### Optimal workspace folder
-In order for MoonTex to work properly, your workspace folder should look something like this:
+In order for moontex to work properly, your workspace folder should look something like this:
 ```
 latex_workspace
 ├── project1
