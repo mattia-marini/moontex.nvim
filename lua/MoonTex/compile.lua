@@ -1,6 +1,6 @@
-local config = require("MoonTex.config")
-local util = require("MoonTex.util")
-local tex_fs = require("MoonTex.fs")
+local config = require("moontex.config")
+local util = require("moontex.util")
+local tex_fs = require("moontex.fs")
 
 --starts/stops continuous conpile with latekmk
 --

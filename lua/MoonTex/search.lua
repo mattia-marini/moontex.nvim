@@ -1,6 +1,6 @@
-local config = require("MoonTex.config")
-local util = require("MoonTex.util")
-local mt_fs = require("MoonTex.fs")
+local config = require("moontex.config")
+local util = require("moontex.util")
+local mt_fs = require("moontex.fs")
 
 
 vim.api.nvim_create_user_command("InverseSearch", "lua inverse_search(match_arg(<q-args>))", { nargs = 1 })
@@ -73,4 +73,4 @@ return {
 }
 --skim synch
 --command: nvim
---args: --headless --noplugin -u <path to installation of MoonTex> -c "InverseSearch \"%file\" %line"
+--args: --headless --noplugin -u <path to installation of moontex> -c "InverseSearch \"%file\" %line"

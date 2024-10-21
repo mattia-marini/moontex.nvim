@@ -1,4 +1,4 @@
-local config = require("MoonTex.config")
+local config = require("moontex.config")
 
 --returns true if file is in directory
 local function is_in_dir(directory, file)

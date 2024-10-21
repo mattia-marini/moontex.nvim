@@ -1,9 +1,9 @@
 --[=[
 vim.api.nvim_buf_set_var(0, "mt_status", { })
 
-require("MoonTex")
-local tex_fs = require("MoonTex.fs")
-local util = require("MoonTex.util")
+require("moontex")
+local tex_fs = require("moontex.fs")
+local util = require("moontex.util")
 
 local function script_dir()
   local str = debug.getinfo(2, "S").source:sub(2)
@@ -12,7 +12,7 @@ end
 
 --setto la directory di dove è installato il plugin per accedere al file .markdown
 print(vim.fs.dirname(vim.fs.dirname(script_dir())))
-vim.api.nvim_set_var("MoonTex_install_dir", vim.fs.dirname(vim.fs.dirname(script_dir())))
+vim.api.nvim_set_var("moontex_install_dir", vim.fs.dirname(vim.fs.dirname(script_dir())))
 --vim.api.nvim_buf_set_var(0, "mt_status", { mainfile_dir = tex_fs.get_root(vim.api.nvim_buf_get_name(0)) })
 util.set_buf_status("mainfile_dir", tex_fs.get_root(vim.api.nvim_buf_get_name(0)))
 
@@ -29,9 +29,9 @@ vim.api.nvim_create_user_command('MTPrintSkimCommand',
   function()
     print("command: nvim")
     print("args: --headless --noplugin -u " ..
-      vim.api.nvim_get_var("MoonTex_install_dir") .. [[/lua/MoonTex/search.lua -c "InverseSearch \"%file\" %line"]])
+      vim.api.nvim_get_var("moontex_install_dir") .. [[/lua/moontex/search.lua -c "InverseSearch \"%file\" %line"]])
   end,
   {})
 ]=]--
 
-require("MoonTex")
+require("moontex")

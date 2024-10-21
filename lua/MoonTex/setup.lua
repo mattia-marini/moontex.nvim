@@ -1,9 +1,9 @@
 vim.api.nvim_buf_set_var(0, "mt_status", {})
 vim.opt.wrap = true
 
-local tex_fs = require("MoonTex.fs")
-local util = require("MoonTex.util")
-local search = require("MoonTex.search")
+local tex_fs = require("moontex.fs")
+local util = require("moontex.util")
+local search = require("moontex.search")
 
 local function script_dir()
   local str = debug.getinfo(2, "S").source:sub(2)
@@ -26,16 +26,19 @@ vim.api.nvim_buf_set_keymap(0, "n", "<space>r", "", {
     toggle_compile()
   end
 })
-vim.api.nvim_set_keymap('n', '<space>s', '', { noremap = true, 
-callback = function ()
-  forward_search()
-end})
-
+vim.api.nvim_set_keymap('n', '<space>s', '', {
+  noremap = true,
+  callback = function()
+    forward_search()
+  end
+})
+--headless --clean --cmd "cd /Users/mattia/.local/share/nvim/lazy/moontex.nvim/lua"
+---u /Users/mattia/.local/share/nvim/lazy/moontex.nvim/lua/moontex/search.lua -c "InverseSearch \"%file\" %line"
 vim.api.nvim_create_user_command('MTPrintSkimCommand',
   function()
     print("command: nvim")
-    print("args: --headless --noplugin -u " ..
-      vim.api.nvim_get_var("MoonTex_install_dir") .. [[/lua/MoonTex/search.lua -c "InverseSearch \"%file\" %line"]])
+    print("args: --headless --clean --cmd \"cd " .. vim.fs.joinpath(vim.api.nvim_get_var("mt_install_dir"), "/lua\"")
+      .. " -u " .. [[./moontex/search.lua -c "InverseSearch \"%file\" %line"]])
   end,
   {})
 vim.api.nvim_create_user_command('MTRevealProject',
