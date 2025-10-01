@@ -33,7 +33,10 @@ function inverse_search(file, line)
     if server:match("^" .. hashed_server_name) then
       local full_path = server_dir .. "/" .. server
       local socket_channel = vim.fn.sockconnect('pipe', full_path, { rpc = 1 })
-      vim.rpcrequest(socket_channel, 'nvim_command', ":lua move_cursor(" .. line .. ")")
+      if socket_channel == 0 then
+        return
+      end
+      local rv = vim.rpcrequest(socket_channel, 'nvim_command', ":lua move_cursor(" .. line .. ")")
       vim.fn.chanclose(socket_channel)
     end
   end
