@@ -23,11 +23,14 @@ end
 
 --invoked by InverseSearch when perfoming inverse search (skim)
 function inverse_search(file, line)
-  local project_name = vim.fs.basename(mt_fs.get_root(file))
+  -- local project_name = vim.fs.basename(mt_fs.get_root(file))
+  local project_root = mt_fs.get_root(file)
+  local hashed_server_name = util.hash_to_length(project_root, 8)
+
   local server_dir = util.get_server_dir()
 
   for server in vim.fs.dir(server_dir) do
-    if server:match("^" .. project_name) then
+    if server:match("^" .. hashed_server_name) then
       local full_path = server_dir .. "/" .. server
       local socket_channel = vim.fn.sockconnect('pipe', full_path, { rpc = 1 })
       vim.rpcrequest(socket_channel, 'nvim_command', ":lua move_cursor(" .. line .. ")")
@@ -49,22 +52,23 @@ local function start_tex_server()
 
   if not mt_fs.path_exists(server_dir) then create_directory(server_dir) end
 
-  local project_name = vim.fs.basename(util.get_buf_status("mainfile_dir"))
 
+  local project_root = util.get_buf_status("mainfile_dir")
+  local server_name = util.hash_to_length(project_root, 8)
+
+  -- Searching fo the highest number for the same project
   local server_number = 0
-
   for path in vim.fs.dir(server_dir) do
-    local curr_n = tonumber(path:match("^" .. project_name .. "%.(%d)"))
+    local curr_n = tonumber(path:match("^" .. server_name .. "%.(%d)"))
     if curr_n then
       if curr_n > server_number then
         server_number = curr_n
       end
     end
   end
-
   server_number = server_number + 1
 
-  vim.fn.serverstart(server_dir .. "/" .. project_name .. "." .. server_number)
+  vim.fn.serverstart(server_dir .. "/" .. server_name .. "." .. server_number)
 end
 
 
